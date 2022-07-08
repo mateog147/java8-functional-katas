@@ -19,6 +19,14 @@ public class Kata5 {
     public static Double execute() {
         List<Movie> movies = DataUtil.getMovies();
 
-        return 3.0;
+        return movies.stream()
+                .map(m -> m.getRating())
+                .reduce((response, rating) ->{
+                    if(response < rating){
+                        return rating;
+                    }
+                    return response;
+                })
+                .orElse(0.0);
     }
 }
